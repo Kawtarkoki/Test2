@@ -1,23 +1,16 @@
 package com.sentrysoftware.Test2.processor.services;
-
+import com.sentrysoftware.Test2.processor.utils.HTTPClient;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ProcessorService {
-    private static final String DATA_URL = "https://xdemo.sentrysoftware.com/rest/namespace/NT_CPU";
-
     public List<String> getAllProcessorIds() {
+        final String DATA_URL = "https://xdemo.sentrysoftware.com/rest/namespace/NT_CPU";
         try {
-            JsonNode rootNode = fetchJsonData(DATA_URL);
+            JsonNode rootNode = HTTPClient.get(DATA_URL);
             JsonNode subnodes = rootNode.get("subnodes");
 
             List<String> processorIds = new ArrayList<>();
@@ -30,23 +23,6 @@ public class ProcessorService {
             return processorIds;
         } catch (Exception e) {
             throw new RuntimeException("Failed to retrieve processor data", e);
-        }
-    }
-
-    private static JsonNode fetchJsonData(String url) throws IOException {
-        HttpURLConnection connection = null;
-        try {
-            connection = (HttpURLConnection) new URL(url).openConnection();
-            connection.setRequestMethod("GET");
-
-            try (InputStream inputStream = connection.getInputStream()) {
-                ObjectMapper objectMapper = new ObjectMapper();
-                return objectMapper.readTree(inputStream);
-            }
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
         }
     }
 }

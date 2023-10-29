@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
-//@EnableOpenApi
 @SpringBootApplication(scanBasePackages = "com.sentrysoftware.Test2")
 @ComponentScan(basePackages = {
 		"com.sentrysoftware.Test2.processor.controllers",
