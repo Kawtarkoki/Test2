@@ -23,16 +23,18 @@ To get a local copy of this project up and running, follow these steps:
 ``
 git clone https://github.com/Kawtarkoki/Test2.git
 ``
+
 2. Open the project in your IDE.
 
-    Build the project using Maven:
+Build the project using Maven:
 
 ``
 mvn clean install
 ``
+
 3. Run the application
 
-    The application will be accessible at :
+The application will be accessible at :
 * http://localhost:9999/processors/CPUprcrProcessorTimePercent/max?history=500
 * http://localhost:9999/processors/CPUprcrProcessorTimePercent/min?history=500
 * http://localhost:9999/processors/CPUprcrProcessorTimePercent/avg?history=500
